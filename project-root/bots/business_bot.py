@@ -1,6 +1,6 @@
 from telegram import Update, ReplyKeyboardMarkup
 from telegram.ext import Application, CommandHandler, MessageHandler, filters, ContextTypes, ConversationHandler
-from db.models import SessionLocal, Cafe, Product  # Убедитесь, что модель Product определена
+from project_root.db.models import SessionLocal, Cafe, Product  # Убедитесь, что модель Product определена
 from prettytable import PrettyTable  # Для отображения таблицы
 
 AUTHENTICATE, ADD_PRODUCT, EDIT_PRODUCT = range(3)
