@@ -1,0 +1,5 @@
+[build]
+command = "pip install -r requirements.txt"
+
+[start]
+command = "python bots/user_bot.py & python bots/business_bot.py"
