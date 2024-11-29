@@ -1,0 +1,1 @@
+DATABASE_URL = 'postgresql+psycopg2://postgres:@localhost:5432/telegram_bot'
