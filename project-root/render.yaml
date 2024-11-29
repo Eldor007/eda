@@ -1,0 +1,7 @@
+services:
+  - type: background_worker
+    name: telegram-bot
+    env: python
+    plan: free
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "python3 bots/user_bot.py & python3 bots/business_bot.py"
