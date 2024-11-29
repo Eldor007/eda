@@ -4,3 +4,4 @@ geopy
 psycopg2-binary
 sqlalchemy
 prettytable
+werkzeug
