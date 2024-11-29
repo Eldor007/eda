@@ -1,4 +1,4 @@
-from models import SessionLocal, Cafe
+from db.models import SessionLocal, Cafe
 import uuid
 
 
