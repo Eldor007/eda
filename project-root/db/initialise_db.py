@@ -4,7 +4,7 @@ from sqlalchemy import Column, Integer, String, Float, ForeignKey
 from sqlalchemy.orm import relationship, sessionmaker
 
 # Подключение к базе данных
-DATABASE_URL = 'postgresql+psycopg2://postgres:@localhost:5432/telegram_bot'
+DATABASE_URL = 'postgresql+psycopg2://postgres:Exeteruni1#@eda.cvmmkqociyon.eu-north-1.rds.amazonaws.com:5432/telegram_bot'
 
 Base = declarative_base()
 engine = create_engine(DATABASE_URL)
