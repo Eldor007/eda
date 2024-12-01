@@ -1,7 +1,7 @@
 from sqlalchemy import create_engine
 
 # Ваша строка подключения
-DATABASE_URL = 'postgresql+psycopg2://postgres:@localhost:5432/telegram_bot'
+DATABASE_URL = 'postgresql+psycopg2://postgres:Exeteruni1#@eda.cvmmkqociyon.eu-north-1.rds.amazonaws.com:5432/telegram_bot'
 
 def test_connection():
     try:
