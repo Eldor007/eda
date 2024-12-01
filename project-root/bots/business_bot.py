@@ -1,10 +1,11 @@
 from telegram import Update, ReplyKeyboardMarkup
 from telegram.ext import Application, CommandHandler, MessageHandler, filters, ContextTypes, ConversationHandler
-from db.models import SessionLocal, Cafe, Product  # Убедитесь, что модель Product определена
-from prettytable import PrettyTable  # Для отображения таблицы
+from db.models import SessionLocal, Cafe, Product  # Модели должны быть определены
+from prettytable import PrettyTable  # Для отображения таблиц
+import psycopg2  # Подключение через psycopg2
+from config.config import DATABASE_URL  # Ваша строка подключения из config.py
 
 AUTHENTICATE, ADD_PRODUCT, EDIT_PRODUCT = range(3)
-
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
