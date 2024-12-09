@@ -14,7 +14,7 @@ from db.models import Cafe  # Ваша модель для кафе
 import pandas as pd
 
 # Подключение к базе данных через SQLAlchemy
-DATABASE_URL = "postgresql+psycopg2://postgres:Exeteruni1#@eda.cvmmkqociyon.eu-north-1.rds.amazonaws.com:5432/telegram_bot"
+DATABASE_URL = "postgresql+psycopg2://postgres:Exeteruni1#@database-1.c18ec4wiiab3.ap-south-1.rds.amazonaws.com:5432/mydb"
 engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
