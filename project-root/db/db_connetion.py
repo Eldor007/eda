@@ -4,10 +4,10 @@ import psycopg2
 def connect_to_db():
     try:
         conn = psycopg2.connect(
-            dbname="telegram_bot",
+            dbname="mydb",
             user="postgres",
             password="Exeteruni1#",  # Ваш пароль
-            host="eda.cvmmkqociyon.eu-north-1.rds.amazonaws.com",  # Ваш endpoint
+            host="database-1.c18ec4wiiab3.ap-south-1.rds.amazonaws.com",
             port="5432"
         )
         print("Успешно подключились к базе данных!")
