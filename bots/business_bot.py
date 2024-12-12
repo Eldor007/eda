@@ -1,5 +1,11 @@
 from telegram import Update, ReplyKeyboardMarkup
 from telegram.ext import Application, CommandHandler, MessageHandler, filters, ContextTypes, ConversationHandler
+import sys
+import os
+
+# Добавляем путь к корневой директории проекта
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 from db.models import SessionLocal, Cafe, Product  # Модели должны быть определены
 from prettytable import PrettyTable  # Для отображения таблиц
 import psycopg2  # Подключение через psycopg2
