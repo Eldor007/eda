@@ -7,11 +7,16 @@ from telegram.ext import (
     ContextTypes,
     ConversationHandler,
 )
+import sys
+import os
 from geopy.distance import geodesic
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from db.models import Cafe  # Ваша модель для кафе
 import pandas as pd
+
+# Добавляем путь к корневой директории проекта
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 # Подключение к базе данных через SQLAlchemy
 DATABASE_URL = "postgresql+psycopg2://postgres:Exeteruni1#@eda.cvmmkqociyon.eu-north-1.rds.amazonaws.com:5432/telegram_bot"
