@@ -1,7 +1,0 @@
-python-telegram-bot==20.0
-pandas
-geopy
-psycopg2-binary
-sqlalchemy
-prettytable
-werkzeug
