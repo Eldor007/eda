@@ -147,7 +147,7 @@ def main():
     application.add_handler(conv_handler)
 
     # Запуск polling с параметром drop_pending_updates
-    application.run_polling(drop_pending_updates=True)
+    application.run_polling()
 
 if __name__ == "__main__":
     main()
