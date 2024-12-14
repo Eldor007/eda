@@ -1,4 +1,5 @@
-import asyncio
+import sys
+import os
 from telegram import Update, ReplyKeyboardMarkup, KeyboardButton
 from telegram.ext import (
     ApplicationBuilder,
@@ -8,17 +9,14 @@ from telegram.ext import (
     ContextTypes,
     ConversationHandler,
 )
-import sys
-import os
-
-# Добавляем путь к корневой директории проекта (если необходимо)
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-
 from geopy.distance import geodesic
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from db.models import Cafe  # Ваша модель для кафе
 import pandas as pd
+
+# Добавляем путь к корневой директории проекта (если необходимо)
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 # Подключение к базе данных через SQLAlchemy
 DATABASE_URL = "postgresql+psycopg2://postgres:Exeteruni1#@eda.cvmmkqociyon.eu-north-1.rds.amazonaws.com:5432/telegram_bot"
@@ -107,6 +105,9 @@ async def handle_language(update: Update, context: ContextTypes.DEFAULT_TYPE):
             reply_markup=ReplyKeyboardMarkup(location_buttons, one_time_keyboard=True, resize_keyboard=True)
         )
         return LOCATION
+    else:
+        await update.message.reply_text("Пожалуйста, выберите один из предложенных вариантов.")
+        return LANGUAGE
 
 # Handle location or district selection
 async def handle_location(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -138,7 +139,7 @@ async def handle_location(update: Update, context: ContextTypes.DEFAULT_TYPE):
         return LOCATION
 
 # Main function
-async def main():
+def main():
     application = (
         ApplicationBuilder()
         .token("7803661490:AAFwVl_ZFAhDCzO1r0DvprT82pcVHV7ab8Q")  # Убедитесь, что токен верный
@@ -157,10 +158,10 @@ async def main():
     application.add_handler(conv_handler)
 
     # Удаляем возможный старый вебхук перед стартом polling
-    await application.bot.delete_webhook(drop_pending_updates=True)
+    application.bot.delete_webhook(drop_pending_updates=True)
 
     # Запуск polling
-    await application.run_polling()
+    application.run_polling()
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    main()
