@@ -1,4 +1,3 @@
-import asyncio
 import sys
 import os
 from telegram import Update, ReplyKeyboardMarkup, KeyboardButton
@@ -14,7 +13,6 @@ from geopy.distance import geodesic
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from db.models import Cafe  # Ваша модель для кафе
-import pandas as pd
 
 # Добавляем путь к корневой директории проекта (если необходимо)
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
@@ -86,7 +84,6 @@ async def handle_language(update: Update, context: ContextTypes.DEFAULT_TYPE):
         context.user_data['language'] = languages[selected_language]
         language = context.user_data['language']
 
-        # Запрос локации
         location_buttons = [
             [KeyboardButton(translations['send_location'][language], request_location=True)],
             [KeyboardButton(translations['choose_district'][language])]
@@ -146,7 +143,7 @@ def main():
 
     application.add_handler(conv_handler)
 
-    # Запуск polling с параметром drop_pending_updates
+    # Запуск polling
     application.run_polling()
 
 if __name__ == "__main__":
