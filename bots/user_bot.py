@@ -9,6 +9,8 @@ from telegram.ext import (
 )
 import sys
 import os
+# Добавляем путь к корневой директории проекта
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from geopy.distance import geodesic
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
