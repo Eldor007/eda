@@ -132,7 +132,11 @@ async def handle_location(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 # Main function
 async def main():
-    application = Application.builder().token("7803661490:AAFwVl_ZFAhDCzO1r0DvprT82pcVHV7ab8Q").build()
+    application = (
+        ApplicationBuilder()
+        .token("7803661490:AAFwVl_ZFAhDCzO1r0DvprT82pcVHV7ab8Q")  # Убедитесь, что токен верный
+        .build()
+    )
 
     conv_handler = ConversationHandler(
         entry_points=[CommandHandler('start', start)],
@@ -146,9 +150,11 @@ async def main():
     application.add_handler(conv_handler)
 
         # Удаляем возможный старый вебхук перед стартом polling
-    application.bot.delete_webhook(drop_pending_updates=True)
+   
+    await application.bot.delete_webhook(drop_pending_updates=True)
     
-    application.run_polling()
+     # Запуск polling
+    await application.run_polling()
 
 if __name__ == "__main__":
     asyncio.run(main())
