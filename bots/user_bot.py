@@ -1,7 +1,7 @@
 import asyncio
 from telegram import Update, ReplyKeyboardMarkup, KeyboardButton
 from telegram.ext import (
-    Application,
+    ApplicationBuilder,
     CommandHandler,
     MessageHandler,
     filters,
@@ -10,16 +10,15 @@ from telegram.ext import (
 )
 import sys
 import os
-# Добавляем путь к корневой директории проекта
+
+# Добавляем путь к корневой директории проекта (если необходимо)
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 from geopy.distance import geodesic
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from db.models import Cafe  # Ваша модель для кафе
 import pandas as pd
-
-# Добавляем путь к корневой директории проекта
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 # Подключение к базе данных через SQLAlchemy
 DATABASE_URL = "postgresql+psycopg2://postgres:Exeteruni1#@eda.cvmmkqociyon.eu-north-1.rds.amazonaws.com:5432/telegram_bot"
@@ -129,6 +128,14 @@ async def handle_location(update: Update, context: ContextTypes.DEFAULT_TYPE):
         else:
             await update.message.reply_text(translations['no_offers'][language])
         return LOCATION
+    elif update.message.text == translations['choose_district'][language]:
+        # Логика выбора района
+        # Здесь можно добавить обработку выбора района
+        await update.message.reply_text("Функционал выбора района пока не реализован.")
+        return LOCATION
+    else:
+        await update.message.reply_text("Пожалуйста, отправьте корректную локацию или выберите район.")
+        return LOCATION
 
 # Main function
 async def main():
@@ -149,11 +156,10 @@ async def main():
 
     application.add_handler(conv_handler)
 
-        # Удаляем возможный старый вебхук перед стартом polling
-   
+    # Удаляем возможный старый вебхук перед стартом polling
     await application.bot.delete_webhook(drop_pending_updates=True)
-    
-     # Запуск polling
+
+    # Запуск polling
     await application.run_polling()
 
 if __name__ == "__main__":
