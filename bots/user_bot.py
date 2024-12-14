@@ -1,3 +1,4 @@
+import asyncio
 from telegram import Update, ReplyKeyboardMarkup, KeyboardButton
 from telegram.ext import (
     Application,
@@ -130,7 +131,7 @@ async def handle_location(update: Update, context: ContextTypes.DEFAULT_TYPE):
         return LOCATION
 
 # Main function
-def main():
+async def main():
     application = Application.builder().token("7803661490:AAFNXG-Wsr_VR-i2JEKS1mKUquHZuQ0EAn4").build()
 
     conv_handler = ConversationHandler(
@@ -150,4 +151,4 @@ def main():
     application.run_polling()
 
 if __name__ == "__main__":
-    main()
+    asyncio.run(main())
