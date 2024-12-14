@@ -24,7 +24,7 @@ engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 # Conversation states
-LANGUAGE, LOCATION, RANGE, DISTRICT = range(4)
+LANGUAGE, LOCATION = range(2)
 
 # Translations dictionary
 translations = {
@@ -48,26 +48,16 @@ translations = {
         'en': "Choose district",
         'uz': "Tumanni tanlash"
     },
-    'choose_range': {
-        'ru': "Выберите диапазон поиска",
-        'en': "Select the search range",
-        'uz': "Qidiruv masofasini tanlang"
-    },
     'no_offers': {
         'ru': "Поблизости нет кафе с предложениями.",
         'en': "There are no cafes nearby with offers.",
         'uz': "Atrofingizda takliflar bilan kafelar yo'q."
     },
-    'back': {
-        'ru': "🔙 Назад",
-        'en': "🔙 Back",
-        'uz': "🔙 Ortga"
+    'invalid_choice': {
+        'ru': "Пожалуйста, выберите один из предложенных вариантов.",
+        'en': "Please choose one of the provided options.",
+        'uz': "Iltimos, taklif qilingan variantlardan birini tanlang."
     },
-    'range_options': {
-        'ru': ['1 км', '2 км', '5 км'],
-        'en': ['1 km', '2 km', '5 km'],
-        'uz': ['1 km', '2 km', '5 km']
-    }
 }
 
 # Start command
@@ -98,7 +88,7 @@ async def handle_language(update: Update, context: ContextTypes.DEFAULT_TYPE):
         # Запрос локации
         location_buttons = [
             [KeyboardButton(translations['send_location'][language], request_location=True)],
-            [translations['choose_district'][language]]
+            [KeyboardButton(translations['choose_district'][language])]
         ]
         await update.message.reply_text(
             translations['location_or_district'][language],
@@ -106,7 +96,7 @@ async def handle_language(update: Update, context: ContextTypes.DEFAULT_TYPE):
         )
         return LOCATION
     else:
-        await update.message.reply_text("Пожалуйста, выберите один из предложенных вариантов.")
+        await update.message.reply_text(translations['invalid_choice']['ru'])
         return LANGUAGE
 
 # Handle location or district selection
@@ -130,12 +120,10 @@ async def handle_location(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await update.message.reply_text(translations['no_offers'][language])
         return LOCATION
     elif update.message.text == translations['choose_district'][language]:
-        # Логика выбора района
-        # Здесь можно добавить обработку выбора района
         await update.message.reply_text("Функционал выбора района пока не реализован.")
         return LOCATION
     else:
-        await update.message.reply_text("Пожалуйста, отправьте корректную локацию или выберите район.")
+        await update.message.reply_text(translations['invalid_choice'][language])
         return LOCATION
 
 # Main function
