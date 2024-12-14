@@ -145,11 +145,8 @@ def main():
 
     application.add_handler(conv_handler)
 
-    # Удаляем возможный старый вебхук перед стартом polling
-    application.bot.delete_webhook(drop_pending_updates=True)
-
-    # Запуск polling
-    application.run_polling()
+    # Запуск polling с параметром drop_pending_updates
+    application.run_polling(drop_pending_updates=True)
 
 if __name__ == "__main__":
     main()
