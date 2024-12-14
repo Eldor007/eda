@@ -12,7 +12,7 @@ import os
 from geopy.distance import geodesic
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from project_root.eda.db.models import Cafe  # Ваша модель для кафе
+from db.models import Cafe  # Ваша модель для кафе
 import pandas as pd
 
 # Добавляем путь к корневой директории проекта
