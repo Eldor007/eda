@@ -131,7 +131,7 @@ async def handle_location(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 # Main function
 def main():
-    application = Application.builder().token("7803661490:AAFM172alG5KXsW4P_H65IaUO6yIt3igsXI").build()
+    application = Application.builder().token("7803661490:AAFNXG-Wsr_VR-i2JEKS1mKUquHZuQ0EAn4").build()
 
     conv_handler = ConversationHandler(
         entry_points=[CommandHandler('start', start)],
